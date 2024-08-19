@@ -5,11 +5,11 @@ const canvas = document.getElementById('hexCanvas');
 const ctx = canvas.getContext('2d');
 const zoomSlider = document.getElementById('zoomSlider');
 let zoomLevel = 1; 
-function resizeCanvas() {
+function resizeCanvas(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
-function drawHexagon(x, y, radius, color) {
+function drawHexagon(x, y, radius, color){
     ctx.beginPath();
     for (let i = 0; i < 6; i++) {
         const angle = Math.PI / 3 * i;
@@ -17,7 +17,7 @@ function drawHexagon(x, y, radius, color) {
         const y_i = y + radius * Math.sin(angle);
         if (i === 0) {
             ctx.moveTo(x_i, y_i);
-        } else {
+        } else{
             ctx.lineTo(x_i, y_i);
         }
     }
@@ -26,13 +26,13 @@ function drawHexagon(x, y, radius, color) {
     ctx.lineWidth = HEX_HLW;
     ctx.stroke();
 }
-function createHexGrid(radius, color) {
+function createHexGrid(radius, color){
     const unit_x = 3 * radius;
     const unit_y = radius * Math.sqrt(3) * 0.5;
     const off_x = 1.5 * radius;
     const rows = Math.ceil(canvas.height / unit_y) + 2;
     const cols = Math.ceil(canvas.width / unit_x) + 2;
-    for (let row = 0; row < rows; row++) {
+    for (let row = 0; row < rows; row++){
         const y = row * unit_y;
         for (let col = 0; col < cols; col++) {
             const x = (row % 2 === 0 ? 0 : off_x) + col * unit_x;
@@ -40,17 +40,17 @@ function createHexGrid(radius, color) {
         }
     }
 }
-function init() {
+function init(){
     resizeCanvas();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const baseRadius = 64;
-    for (let i = 0; i < zoomLevel && i < COLORS.length; i++) {
+    for (let i = 0; i < zoomLevel && i < COLORS.length; i++){
         const zoomFactor = Math.pow(2, i); 
         const currentRadius = baseRadius / zoomFactor;
         createHexGrid(currentRadius, COLORS[i]);
     }
 }
-zoomSlider.addEventListener('input', function () {
+zoomSlider.addEventListener('input', function (){
     zoomLevel = parseFloat(zoomSlider.value);
     init();
 });
