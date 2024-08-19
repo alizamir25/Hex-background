@@ -1,10 +1,10 @@
-const HEX_GAP = 0; // No gap to ensure alignment
-const HEX_HLW = 2; // Hex line width
-const COLORS = ['#ff0066', '#00ccff', '#66ff66', '#ffcc00', '#cc66ff']; // Different colors for each level of hexagons
+const HEX_GAP = 0; 
+const HEX_HLW = 2; 
+const COLORS = ['#ff0066', '#00ccff', '#66ff66', '#ffcc00', '#cc66ff']; 
 const canvas = document.getElementById('hexCanvas');
 const ctx = canvas.getContext('2d');
 const zoomSlider = document.getElementById('zoomSlider');
-let zoomLevel = 1; // Start at the lowest zoom level
+let zoomLevel = 1; 
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -45,7 +45,7 @@ function init() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const baseRadius = 64;
     for (let i = 0; i < zoomLevel && i < COLORS.length; i++) {
-        const zoomFactor = Math.pow(2, i); // Each level is a factor of 2 smaller than the previous
+        const zoomFactor = Math.pow(2, i); 
         const currentRadius = baseRadius / zoomFactor;
         createHexGrid(currentRadius, COLORS[i]);
     }
