@@ -1,21 +1,16 @@
 // Variables for hexagon grids
 const HEX_GAP = 0; // No gap to ensure alignment
 const HEX_HLW = 2; // Hex line width
-
 // Colors for the grids
 const COLORS = ['#ff0066', '#00ccff', '#66ff66', '#ffcc00', '#cc66ff']; // Different colors for each level of hexagons
-
 const canvas = document.getElementById('hexCanvas');
 const ctx = canvas.getContext('2d');
 const zoomSlider = document.getElementById('zoomSlider');
-
 let zoomLevel = 1; // Start at the lowest zoom level
-
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
-
 // Draw a single hexagon
 function drawHexagon(x, y, radius, color) {
     ctx.beginPath();
@@ -34,16 +29,13 @@ function drawHexagon(x, y, radius, color) {
     ctx.lineWidth = HEX_HLW;
     ctx.stroke();
 }
-
 // Create the grid of hexagons
 function createHexGrid(radius, color) {
     const unit_x = 3 * radius;
     const unit_y = radius * Math.sqrt(3) * 0.5;
     const off_x = 1.5 * radius;
-
     const rows = Math.ceil(canvas.height / unit_y) + 2;
     const cols = Math.ceil(canvas.width / unit_x) + 2;
-
     for (let row = 0; row < rows; row++) {
         const y = row * unit_y;
         for (let col = 0; col < cols; col++) {
@@ -52,15 +44,12 @@ function createHexGrid(radius, color) {
         }
     }
 }
-
 // Initialize and draw grid
 function init() {
     resizeCanvas();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     // Base radius for the largest hexagons
     const baseRadius = 64;
-
     // Draw multiple layers of hexagon grids based on the zoom level
     for (let i = 0; i < zoomLevel && i < COLORS.length; i++) {
         const zoomFactor = Math.pow(2, i); // Each level is a factor of 2 smaller than the previous
@@ -68,15 +57,12 @@ function init() {
         createHexGrid(currentRadius, COLORS[i]);
     }
 }
-
 // Event listener for the zoom slider
 zoomSlider.addEventListener('input', function () {
     zoomLevel = parseFloat(zoomSlider.value);
     init();
 });
-
 // Resize the canvas when the window is resized
 window.addEventListener('resize', init);
-
 // Initial setup
 init();
