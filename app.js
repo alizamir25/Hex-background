@@ -1,7 +1,5 @@
-// Variables for hexagon grids
 const HEX_GAP = 0; // No gap to ensure alignment
 const HEX_HLW = 2; // Hex line width
-// Colors for the grids
 const COLORS = ['#ff0066', '#00ccff', '#66ff66', '#ffcc00', '#cc66ff']; // Different colors for each level of hexagons
 const canvas = document.getElementById('hexCanvas');
 const ctx = canvas.getContext('2d');
@@ -11,7 +9,6 @@ function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
-// Draw a single hexagon
 function drawHexagon(x, y, radius, color) {
     ctx.beginPath();
     for (let i = 0; i < 6; i++) {
@@ -29,7 +26,6 @@ function drawHexagon(x, y, radius, color) {
     ctx.lineWidth = HEX_HLW;
     ctx.stroke();
 }
-// Create the grid of hexagons
 function createHexGrid(radius, color) {
     const unit_x = 3 * radius;
     const unit_y = radius * Math.sqrt(3) * 0.5;
@@ -44,7 +40,6 @@ function createHexGrid(radius, color) {
         }
     }
 }
-// Initialize and draw grid
 function init() {
     resizeCanvas();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -57,12 +52,9 @@ function init() {
         createHexGrid(currentRadius, COLORS[i]);
     }
 }
-// Event listener for the zoom slider
 zoomSlider.addEventListener('input', function () {
     zoomLevel = parseFloat(zoomSlider.value);
     init();
 });
-// Resize the canvas when the window is resized
 window.addEventListener('resize', init);
-// Initial setup
 init();
