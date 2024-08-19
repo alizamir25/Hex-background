@@ -43,9 +43,7 @@ function createHexGrid(radius, color) {
 function init() {
     resizeCanvas();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // Base radius for the largest hexagons
     const baseRadius = 64;
-    // Draw multiple layers of hexagon grids based on the zoom level
     for (let i = 0; i < zoomLevel && i < COLORS.length; i++) {
         const zoomFactor = Math.pow(2, i); // Each level is a factor of 2 smaller than the previous
         const currentRadius = baseRadius / zoomFactor;
